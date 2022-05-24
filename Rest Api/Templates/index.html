@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+    <title>Github Finder</title>
+
+    
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-danger mb-3">
+        <div class="container">
+            
+            <a href="/" class = "navbar-brand">Searching Github Users</a>
+        </div>
+    </nav>
+    <div class="container searchContainer">
+        <div class="search card card-body">
+            <h3>Search Github users</h3>
+            <p class="lead">
+                Enter the user's nickname and get the user's infos!
+            </p>
+            <form action="/" method="post">
+                <input type="text" name="githubname" class = "form-control" placeholder="Github user's nickname">
+                <br>
+                <button type = "submit" class ="btn btn-danger">Search</button>
+            </form>
+        </div>
+        <br>
+        {% if profile %}
+        <div id="profile">
+            
+            <div class="card card-body mb-3">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <img class="img-fluid mb-2" src="{{profile.avatar_url}}">
+                        <a href="{{profile.html_url}}" target="_blank" class="btn btn-danger btn-block mb-4">Show Profile</a>
+                      </div>
+                      <div class="col-md-9">
+                        <span class="badge badge-primary">Repos : {{profile.public_repos}} </span>
+                        <span class="badge badge-secondary">Gists : {{profile.public_gists}} </span>
+                        <span class="badge badge-success">Followers : {{profile.followers}} </span>
+                        <span class="badge badge-info">Following : {{profile.following}} </span>
+                        <br><br>
+                        <ul class="list-group">
+                          <li class="list-group-item">Company : {{profile.company}} </li>
+                          <li class="list-group-item">Website/Blog : {{profile.blog}} </li>
+                          <li class="list-group-item">Location : {{profile.location}} </li>
+                          <li class="list-group-item">Created date : {{profile.created_at}} </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <h3 class="page-heading mb-3">Latest repos</h3>
+                  <div id="repos" style ="margin-bottom: 100px;">
+                        
+                        {% for repo in repos %}
+                        <div class="card card-body mb-2">
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <span>{{repo.name}}</span> 
+                                    <a href="{{repo.html_url}}" target = "_blank" class = "btn btn-danger"> Go to the repo </a>
+                                  </div>
+                                  <div class="col-md-6">
+                                  <span class="badge badge-primary">Stars: {{repo.stargazers_count}}</span>
+                                  <span class="badge badge-secondary">Watchers:{{repo.watchers}}</span>
+                                  <span class="badge badge-success">Forks:{{repo.forks}}</span>
+                                  </div>
+                                </div>
+                        </div>
+                        {% endfor %}
+                       
+                               
+                   
+                  </div> 
+            
+            
+        </div>
+        {% else %}
+
+        {% if error %}
+        <div class = "alert alert-danger">
+        {{error}}
+        </div>
+        
+            {% endif %}
+
+        {% endif %}
+        
+
+       
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
